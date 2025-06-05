@@ -1,0 +1,64 @@
+help {
+    z-index: 1000;
+}
+
+.helpBubble {
+    border          : none;
+    background-color: transparent;
+    .fluid(font-size, 2em, 3em);
+    color      : crimson;
+    cursor     : help;
+    text-shadow: 0 1px 1px var(--hotpinkTint);
+    transition : all .2s ease-in-out;
+    opacity    : 1;
+
+    &.hide {
+        opacity: 0;
+    }
+}
+
+weak {
+    font-weight: normal;
+}
+
+.helpContent {
+    position        : fixed;
+    left            : 0;
+    display         : flex;
+    z-index         : 1000;
+    flex-direction  : column;
+    justify-content : center;
+    font-size       : ~'max(2em, 5vmin)';
+    overflow        : hidden auto;
+    transition      : all .5s ease-in-out;
+    width           : 100vw;
+    height          : 100dvh;
+    padding-inline  : calc(~'max(((100vw - var(--boardSize)) / 2) - var(--distance), var(--tilePadding) * 2.5)');
+    color           : var(--primaryColor);
+    background-color: rgba(0, 0, 0, 0.75);
+
+    .heading {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : center;
+    }
+
+    h2:hover {
+        color: crimson;
+    }
+
+    p,
+    a {
+        color: inherit;
+    }
+
+    &.down {
+        top    : 100vh;
+        opacity: 0;
+    }
+
+    &.up {
+        opacity: 1;
+        top    : 0;
+    }
+}

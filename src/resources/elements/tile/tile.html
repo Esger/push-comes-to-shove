@@ -1,0 +1,17 @@
+<template>
+    <div class="tile tile--${tile.color}
+            ${win ? 'win' : ''}
+            ${animated ? 'animated' : ''}
+            ${dragged ? 'dragged' : ''} 
+            ${burn ? 'burn' : ''} 
+            ${correct ? 'correct' : ''}
+            ${incorrect ? 'incorrect' : ''}
+            ${locked ? 'locked' : ''}
+            ${onfire ? 'onfire' : ''}
+            ${visible ? '' : 'hide'}
+            x_${tile.x} y_${tile.y}"
+         id.one-time="tile.id"
+         css="left: calc(${tile.x} * var(--distance) + var(--tilePadding));
+            top: calc(${tile.y} * var(--distance) + var(--tilePadding));
+            transform: translate3d(calc(${dx} * var(--distance)), calc(${dy} * var(--distance)), 0);"></div>
+</template>

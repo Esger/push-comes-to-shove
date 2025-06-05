@@ -1,0 +1,324 @@
+game {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: var(--boardSize);
+  justify-content: center;
+  height: 100dvh;
+}
+game header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 6vh;
+  padding-inline: calc(var(--tilePadding) * 1.5);
+  width: var(--boardSize);
+}
+game header h1,
+game header h2,
+game header h3,
+game header button {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 4vmin;
+  text-shadow: 0 1px 2px var(--hotpinkTint);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: crimson;
+  padding: 0;
+  margin: 0;
+}
+game header h1:hover,
+game header h2:hover,
+game header h3:hover,
+game header button:hover {
+  color: white;
+}
+game header h1 {
+  cursor: pointer;
+  font-size: clamp(36px, 1.9166666666666667rem + 1.7777777777777777vw, 52px);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-inline: auto;
+}
+game header h1 span:nth-child(2n + 1) {
+  color: hotpink;
+}
+game header h1.level--2 span:nth-child(3n + 1) {
+  color: purple;
+}
+game header h1.level--3 span:nth-child(3n + 1) {
+  color: black;
+}
+game header h1.level--3 span:nth-child(4n + 1) {
+  color: purple;
+}
+game header h2 {
+  font-size: clamp(36px, 1.6666666666666665rem + 3.111111111111111vw, 64px);
+  margin-bottom: 6vmin;
+  line-height: 1.5;
+}
+game header h3.moves,
+game header button {
+  font-size: clamp(15px, 0.875rem + 0.3333333333333333vw, 18px);
+}
+game header h3.moves {
+  text-shadow: none;
+  line-height: 1.2;
+}
+game header li {
+  margin-bottom: 6vmin;
+}
+board {
+  background-color: transparent;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  height: var(--boardSize);
+  width: var(--boardSize);
+}
+.tile {
+  border-radius: 9in;
+  box-shadow: 0 2px 10px #1e1e1e;
+  cursor: grab;
+  display: block;
+  height: var(--tileSize);
+  overflow: hidden;
+  position: absolute;
+  transition: backround-image 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  width: var(--tileSize);
+}
+.tile.tile--1 {
+  background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);
+}
+.tile.tile--2 {
+  background-image: radial-gradient(var(--crimsonTint) 5%, crimson);
+}
+.tile.tile--3 {
+  background-image: radial-gradient(var(--purpleTint) 5%, purple);
+}
+.tile.tile--4 {
+  background-image: radial-gradient(var(--blackTint) 5%, black);
+}
+.tile.animated {
+  transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-out;
+  z-index: 100;
+}
+.tile.win {
+  --successColor: green;
+  --succesHightlightColor: #80ff80;
+  box-shadow: 0 0 calc(var(--tileSize) * .4) 0 var(--successColor), 0 0 calc(var(--tileSize) * 0.6) 0 var(--succesHightlightColor), 0 0 calc(var(--tileSize) * .5) 0 var(--succesHightlightColor), 0 0 calc(var(--tileSize) * 0.4) 0 var(--succesHightlightColor), 0 0 calc(var(--tileSize) * .3) 0 var(--succesHightlightColor), 0 0 calc(var(--tileSize) * 0.2) 0 var(--succesHightlightColor);
+}
+.tile.burn {
+  transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.tile.correct {
+  transform: scale(1.05, 1.05) !important;
+  transition: transform 0.2s ease-out;
+  z-index: 100;
+}
+.tile.dragged {
+  box-shadow: 0 3px 5px #aaa;
+  cursor: -webkit-grabbing;
+  z-index: 100;
+}
+.tile.follow {
+  transition: transform 0.2s ease-in;
+}
+.tile.hide {
+  opacity: 0;
+}
+.tile.incorrect {
+  transform: scale(0.95, 0.95) !important;
+}
+.tile.locked {
+  pointer-events: none;
+}
+.tile.onfire {
+  background-color: orangered;
+  cursor: not-allowed;
+}
+.tile.retracted {
+  transition: transform 0.2s ease-out;
+  z-index: 100;
+}
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 3% 12% 50% 12%;
+  border-radius: 50% / 59% 59% 41% 41%;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.1));
+  pointer-events: none;
+}
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 55% 12% 3% 12%;
+  border-radius: 50% / 41% 41% 59% 59%;
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+  filter: blur(5px);
+  pointer-events: none;
+}
+help {
+  z-index: 1000;
+}
+.helpBubble {
+  border: none;
+  background-color: transparent;
+  font-size: clamp(2em, 0.10416666666666667rem + 0.1111111111111111vw, 3em);
+  color: crimson;
+  cursor: help;
+  text-shadow: 0 1px 1px var(--hotpinkTint);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+.helpBubble.hide {
+  opacity: 0;
+}
+weak {
+  font-weight: normal;
+}
+.helpContent {
+  position: fixed;
+  left: 0;
+  display: flex;
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  font-size: max(2em, 5vmin);
+  overflow: hidden auto;
+  transition: all 0.5s ease-in-out;
+  width: 100vw;
+  height: 100dvh;
+  padding-inline: calc(max(((100vw - var(--boardSize)) / 2) - var(--distance), var(--tilePadding) * 2.5));
+  color: var(--primaryColor);
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.helpContent .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.helpContent h2:hover {
+  color: crimson;
+}
+.helpContent p,
+.helpContent a {
+  color: inherit;
+}
+.helpContent.down {
+  top: 100vh;
+  opacity: 0;
+}
+.helpContent.up {
+  opacity: 1;
+  top: 0;
+}
+/*
+ * Mixin for fluid scaling of fonts with mobile default screen widths
+ * Usage: .fluid(font-size, 14px, 16px);
+ * Or:    .fluid(margin, 14px, 16px, 300px, 600px); // min. and max. screen widths
+ */
+body {
+  --goldenRatio: 0.61805;
+  --maxRelativeBoardSize: 95vmin;
+  --minRelativeBoardSize: calc(var(--maxRelativeBoardSize) * var(--goldenRatio));
+  --boardSize: var(--maxRelativeBoardSize);
+  --distance: calc(var(--boardSize) * .2);
+  --tileSize: calc(var(--distance) * .8);
+  --tilePadding: calc(var(--distance) * .1);
+  --primaryColor: navajowhite;
+  --bgColor: black;
+  --blackTint: #333333;
+  --hotpinkTint: #ffcfe7;
+  --crimsonTint: #f16581;
+  --purpleTint: #e600e6;
+  --tileGutterSize: 2vmin;
+}
+@media screen and (min-width: 600px) {
+  body {
+    --boardSize: var(--minRelativeBoardSize);
+  }
+}
+body,
+html {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', sans-serif;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+}
+body {
+  background-color: var(--bgColor);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}

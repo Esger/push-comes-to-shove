@@ -1,0 +1,58 @@
+// Definitions
+/*
+ * Mixin for fluid scaling of fonts with mobile default screen widths
+ * Usage: .fluid(font-size, 14px, 16px);
+ * Or:    .fluid(margin, 14px, 16px, 300px, 600px); // min. and max. screen widths
+ */
+@root-font-size: 16px; // Adjust this if your root font size is different
+
+.fluid(@property, @min-value, @max-value, @min-vw: 300, @max-vw: 1200) {
+    @min-value-px: @min-value;
+    @max-value-px: @max-value;
+    @factor      : (1 / (@max-vw - @min-vw)) * (@max-value-px - @min-value-px);
+    @base        : unit((@min-value-px / @root-font-size - @min-vw * @factor / @root-font-size), rem);
+    @slope       : unit((100 * @factor), vw);
+
+    // @{property}: @min-value;  // Fallback niet meer nodig?
+    @{property} :~"clamp(@{min-value}, @{base} + @{slope}, @{max-value})";
+}
+
+body {
+    --goldenRatio         : 0.61805;
+    --maxRelativeBoardSize: 95vmin;
+    --minRelativeBoardSize: calc(~'var(--maxRelativeBoardSize) * var(--goldenRatio)');
+    --boardSize           : var(--maxRelativeBoardSize);
+
+    @media screen and (min-width: 600px) {
+        --boardSize: var(--minRelativeBoardSize);
+    }
+
+    --distance   : calc(~'var(--boardSize) * .2');
+    --tileSize   : calc(~'var(--distance) * .8');
+    --tilePadding: calc(~'var(--distance) * .1');
+
+    --primaryColor  : navajowhite;
+    --bgColor       : black;
+    --blackTint     : lighten(black, 20%);
+    --hotpinkTint   : lighten(hotpink, 20%);
+    --crimsonTint   : lighten(crimson, 20%);
+    --purpleTint    : lighten(purple, 20%);
+    --tileGutterSize: 2vmin;
+}
+
+body,
+html {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', sans-serif;
+    height     : 100%;
+    overflow   : hidden;
+    position   : fixed;
+    inset      : 0;
+}
+
+body {
+    background-color: var(--bgColor);
+    align-items     : center;
+    display         : flex;
+    justify-content : center;
+    margin          : 0;
+}
