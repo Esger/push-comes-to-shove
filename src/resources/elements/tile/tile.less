@@ -1,18 +1,24 @@
 .tile {
-    border       : none;
-    border-radius: 9in;
-    box-shadow   : 0 2px 10px #1e1e1e;
-    display      : block;
-    height       : var(--tileSize);
-    overflow     : hidden;
-    position     : absolute;
-    left         : var(--tilePadding);
-    top          : var(--tilePadding);
-    transition   : transform .2s ease-in-out;
-    width        : var(--tileSize);
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    border         : none;
+    border-radius  : 9in;
+    box-shadow     : 0 2px 10px #1e1e1e;
+    height         : var(--tileSize);
+    overflow       : hidden;
+    position       : absolute;
+    left           : var(--tilePadding);
+    top            : var(--tilePadding);
+    transition     : transform .2s ease-in-out;
+    width          : var(--tileSize);
 
     &:not(:disabled) {
         cursor: pointer;
+
+        &:hover svg {
+            opacity: 0.7;
+        }
     }
 
     &.tile--1 {
@@ -40,6 +46,22 @@
         transform : scale(0.95, 0.95) !important;
     }
 
+    &.tile--top svg {
+        rotate: 90deg;
+    }
+
+    &.tile--right svg {
+        rotate: 180deg;
+    }
+
+    &.tile--bottom svg {
+        rotate: -90deg;
+    }
+
+    &.tile--left svg {
+        rotate: 0deg;
+    }
+
     &::before {
         content       : '';
         position      : absolute;
@@ -59,4 +81,10 @@
         pointer-events: none;
     }
 
+    svg {
+        color  : white;
+        flex   : 0 0 50%;
+        height : 50%;
+        opacity: 0;
+    }
 }
