@@ -59,6 +59,7 @@ export class BoardCustomElement {
         for (let y = 0; y < this.maxPosition; y++) 
             for (let x = 0; x < this.maxPosition; x++) 
                 this.board.push(this._newTile(x, y));
+        this.board.shift();
 
         setTimeout(_ => this.showBoard = true, 200);
 
