@@ -4,4 +4,15 @@ board {
     user-select     : none;
     height          : var(--boardSize);
     width           : var(--boardSize);
+
+    &::after {
+        content       : '';
+        display       : block;
+        position      : absolute;
+        inset         : var(--distance) 0 0 var(--distance);
+        border-radius : 1vmin;
+        background    : linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+        filter        : blur(5px);
+        pointer-events: none;
+    }
 }
