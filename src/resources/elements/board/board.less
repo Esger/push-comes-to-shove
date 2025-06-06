@@ -5,11 +5,11 @@ board {
     height          : var(--boardSize);
     width           : var(--boardSize);
 
-    &::after {
+    &::before {
         content       : '';
         display       : block;
         position      : absolute;
-        inset         : var(--distance) 0 0 var(--distance);
+        inset         : var(--distance) var(--distance) var(--distance) var(--distance);
         border-radius : 1vmin;
         background    : linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
         filter        : blur(5px);
