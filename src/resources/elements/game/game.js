@@ -1,20 +1,20 @@
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { DragService } from 'resources/services/drag-service';
 import { ScoreService } from 'resources/services/score-service';
 
-@inject(DragService, ScoreService, EventAggregator)
+@inject(ScoreService, EventAggregator)
 export class GameCustomElement {
-    title = 'uniColor';
+    title = 'Push Comes to Shove';
     level = 1;
+    rowTileCount = 5;
 
-    constructor(dragService, scoreService, eventAggregator) {
-        this.dragService = dragService;
+    constructor(scoreService, eventAggregator) {
         this._eventAggregator = eventAggregator;
         this._scoreService = scoreService;
     }
 
     attached() {
+        document.body.style ='--rowTileCount: ' + this.rowTileCount;
         this.highScore = this._scoreService.getScore();
         this._highSubscription = this._eventAggregator.subscribe('high', value => {
             if (value > this.highScore) {
@@ -30,7 +30,7 @@ export class GameCustomElement {
             this.level = level - 1;
             this.levelClass = 'level--' + (level - 1);
         });
-        this._restartSubscription = this._eventAggregator.subscribe('restart', () => {
+        this._restartSubscription = this._eventAggregator.subscribe('restart', _ => {
             this.level = 1;
             this.levelClass = 'level--0';
         });

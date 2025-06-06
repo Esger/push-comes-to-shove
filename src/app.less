@@ -13,7 +13,6 @@
     @base        : unit((@min-value-px / @root-font-size - @min-vw * @factor / @root-font-size), rem);
     @slope       : unit((100 * @factor), vw);
 
-    // @{property}: @min-value;  // Fallback niet meer nodig?
     @{property} :~"clamp(@{min-value}, @{base} + @{slope}, @{max-value})";
 }
 
@@ -27,9 +26,10 @@ body {
         --boardSize: var(--minRelativeBoardSize);
     }
 
-    --distance   : calc(~'var(--boardSize) * .2');
-    --tileSize   : calc(~'var(--distance) * .8');
-    --tilePadding: calc(~'var(--distance) * .1');
+    --rowTileCount: 6;
+    --distance    : calc(~'var(--boardSize) / var(--rowTileCount)');
+    --tileSize    : calc(~'var(--distance) * .8');
+    --tilePadding : calc(~'var(--distance) * .1');
 
     --primaryColor  : navajowhite;
     --bgColor       : black;

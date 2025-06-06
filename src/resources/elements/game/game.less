@@ -13,11 +13,17 @@ game {
     header {
         position       : relative;
         display        : flex;
+        flex-direction: column;
         align-items    : center;
         justify-content: space-between;
         margin         : 0 0 6vh;
         padding-inline : calc(~'var(--tilePadding) * 1.5');
         width          : var(--boardSize);
+
+        .feedback{
+            display: flex;
+            width: 100%;
+        }
 
         h1,
         h2,
@@ -40,8 +46,9 @@ game {
             cursor: pointer;
             .fluid(font-size, 36px, 52px);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-inline : auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
 
             // odd spans are purple
             span:nth-child(2n + 1) {

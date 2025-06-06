@@ -1,13 +1,19 @@
 .tile {
+    border       : none;
     border-radius: 9in;
     box-shadow   : 0 2px 10px #1e1e1e;
-    cursor       : grab;
     display      : block;
     height       : var(--tileSize);
     overflow     : hidden;
     position     : absolute;
-    transition   : backround-image .2s ease-in-out, opacity .2s ease-in-out;
+    left         : var(--tilePadding);
+    top          : var(--tilePadding);
+    transition   : transform .2s ease-in-out;
     width        : var(--tileSize);
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 
     &.tile--1 {
         background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);
@@ -25,46 +31,6 @@
         background-image: radial-gradient(var(--blackTint) 5%, black);
     }
 
-    &.animated {
-        transition: background-color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-out;
-        z-index   : 100;
-    }
-
-    &.win {
-        --successColor         : green;
-        --succesHightlightColor: lighten(green, 50%);
-        box-shadow             :
-            0 0 calc(~'var(--tileSize) * .4') 0 var(--successColor),
-            0 0 calc(~'var(--tileSize) * 0.6') 0 var(--succesHightlightColor),
-            0 0 calc(~'var(--tileSize) * .5') 0 var(--succesHightlightColor),
-            0 0 calc(~'var(--tileSize) * 0.4') 0 var(--succesHightlightColor),
-            0 0 calc(~'var(--tileSize) * .3') 0 var(--succesHightlightColor),
-            0 0 calc(~'var(--tileSize) * 0.2') 0 var(--succesHightlightColor);
-    }
-
-    &.burn {
-        @tileColor: orange;
-        transition: background-color .2s ease-in-out, opacity .2s ease-in-out;
-    }
-
-    &.correct {
-        @tileColor: lightgreen;
-        transform : scale(1.05, 1.05) !important;
-        transition: transform .2s ease-out;
-        z-index   : 100;
-    }
-
-    &.dragged {
-        @tileColor: palegoldenrod;
-        box-shadow: 0 3px 5px #aaa;
-        cursor    : -webkit-grabbing;
-        z-index   : 100;
-    }
-
-    &.follow {
-        transition: transform .2s ease-in;
-    }
-
     &.hide {
         opacity: 0;
     }
@@ -72,21 +38,6 @@
     &.incorrect {
         @tileColor: lightcoral;
         transform : scale(0.95, 0.95) !important;
-    }
-
-    &.locked {
-        // opacity       : .5; // temp
-        pointer-events: none;
-    }
-
-    &.onfire {
-        background-color: orangered;
-        cursor          : not-allowed;
-    }
-
-    &.retracted {
-        transition: transform .2s ease-out;
-        z-index   : 100;
     }
 
     &::before {
