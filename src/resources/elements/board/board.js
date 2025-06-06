@@ -1,9 +1,10 @@
-import { inject } from 'aurelia-framework';
+import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { MySettingsService } from 'resources/services/my-settings-service';
 
 @inject(Element, EventAggregator, MySettingsService)
 export class BoardCustomElement {
+    @bindable rowTileCount;
     maxColors = 2;
     win = false;
 
@@ -17,8 +18,6 @@ export class BoardCustomElement {
         this._settingService = mySettingsService;
         this._highestValue = 1;
         this._score = 0;
-        this.rowTileCount = 5; // tiles in one row
-        this.center = Math.floor(this.rowTileCount / 2);
         this.board = [];
         this.showBoard = true;
         this._newValues = [1];
@@ -28,9 +27,12 @@ export class BoardCustomElement {
     attached() {
         this.boardSize = Number(getComputedStyle(document.documentElement).getPropertyValue('--boardSize'));
         this._tileSize = Number(getComputedStyle(document.documentElement).getPropertyValue('--tileSize'));
-        this.center = Math.floor(this.boardSize / 2);
         this.offset = this.boardSize * 2 / (this.boardSize + 1);
         this.distance = this._tileSize + this.offset;
+    }
+
+    rowTileCountChanged(newValue) {
+        this.maxPosition = newValue - 1;
     }
 
     _newTile(x, y) {
@@ -39,7 +41,7 @@ export class BoardCustomElement {
             y: y,
             dx: 0,
             dy: 0,
-            id: 'tile_' + y * this.rowTileCount + x,
+            id: 'tile_' + y * (this.maxPosition) + x,
             color: 'transparent',
         };
         return tile;
@@ -54,8 +56,8 @@ export class BoardCustomElement {
         this.showBoard = false;
         this.board = [];
 
-        for (let y = 0; y < this.rowTileCount; y++) 
-            for (let x = 0; x < this.rowTileCount; x++) 
+        for (let y = 0; y < this.maxPosition; y++) 
+            for (let x = 0; x < this.maxPosition; x++) 
                 this.board.push(this._newTile(x, y));
 
         setTimeout(_ => this.showBoard = true, 200);
@@ -87,13 +89,13 @@ export class BoardCustomElement {
             case tile.x == 0:
                 this._pushRow(tile.y, 1);
                 break;
-            case tile.x == this.rowTileCount:
+            case tile.x == this.maxPosition:
                 this._pushRow(tile.y, -1);
                 break;
             case tile.y == 0:
                 this._pushColumn(tile.x, 1);
                 break;
-            case tile.y == this.rowTileCount:
+            case tile.y == this.maxPosition:
                 this._pushColumn(tile.x, -1);
                 break;
         }

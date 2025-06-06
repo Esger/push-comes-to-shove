@@ -26,9 +26,10 @@ body {
         --boardSize: var(--minRelativeBoardSize);
     }
 
-    --distance   : calc(~'var(--boardSize) * .1667');
-    --tileSize   : calc(~'var(--distance) * .8');
-    --tilePadding: calc(~'var(--distance) * .1');
+    --rowTileCount: 6;
+    --distance    : calc(~'var(--boardSize) / var(--rowTileCount)');
+    --tileSize    : calc(~'var(--distance) * .8');
+    --tilePadding : calc(~'var(--distance) * .1');
 
     --primaryColor  : navajowhite;
     --bgColor       : black;

@@ -4,7 +4,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 @inject(Element, EventAggregator)
 export class TileCustomElement {
     @bindable tile;
-    @bindable rowTileCount;
+    @bindable maxPosition;
     @bindable maxColors;
     @bindable win;
 

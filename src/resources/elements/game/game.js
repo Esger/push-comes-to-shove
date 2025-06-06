@@ -6,6 +6,7 @@ import { ScoreService } from 'resources/services/score-service';
 export class GameCustomElement {
     title = 'Push Comes to Shove';
     level = 1;
+    rowTileCount = 5;
 
     constructor(scoreService, eventAggregator) {
         this._eventAggregator = eventAggregator;
@@ -13,6 +14,7 @@ export class GameCustomElement {
     }
 
     attached() {
+        document.body.style ='--rowTileCount: ' + this.rowTileCount;
         this.highScore = this._scoreService.getScore();
         this._highSubscription = this._eventAggregator.subscribe('high', value => {
             if (value > this.highScore) {
