@@ -1,9 +1,8 @@
 <template>
     <button class="tile tile--${tile.color}
-            ${win ? 'win' : ''}
             ${incorrect ? 'incorrect' : ''}
             x_${tile.x} y_${tile.y}"
-            disabled.bind="tile.x > 0 && tile.x < maxPosition && tile.y > 0 && tile.y < maxPosition || tile.x == 0 && tile.y == 0 || tile.x == maxPosition && tile.y == maxPosition || tile.x == 0 && tile.y == maxPosition || tile.x == maxPosition && tile.y == 0"
+            disabled.bind="tile.x > 0 && tile.x < maxPosition && tile.y > 0 && tile.y < maxPosition"
             click.delegate="push()"
             id.one-time="tile.id"
             css="transform: translate3d(calc(${tile.x} * var(--distance)), calc(${tile.y} * var(--distance)), 0);"></button>

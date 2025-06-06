@@ -39,8 +39,6 @@ export class BoardCustomElement {
         const tile = {
             x: x,
             y: y,
-            dx: 0,
-            dy: 0,
             id: 'tile_' + y * (this.maxPosition) + x,
             color: 'transparent',
         };
