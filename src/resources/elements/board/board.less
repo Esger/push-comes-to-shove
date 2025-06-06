@@ -14,5 +14,11 @@ board {
         background    : linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
         filter        : blur(5px);
         pointer-events: none;
+
+    }
+    &.win::before {
+        border       : 20px solid #00be00;
+        scale        : 1.05;
+        border-radius: 80px;
     }
 }

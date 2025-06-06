@@ -77,10 +77,19 @@ export class BoardCustomElement {
         }
         this._pushSubscription = this._eventAggregator.subscribe('push', tile => {
             this._push(tile);
+            this._checkWin();
             this._moves++;
             this._eventAggregator.publish('moves', { moves: this._moves });
             this._saveSettings();
         });
+    }
+
+    _checkWin(){
+        const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);   
+        if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
+        this.win = true;
+        this._gameEnd = true;
+        this._eventAggregator.publish('win');
     }
 
     _push(tile) {

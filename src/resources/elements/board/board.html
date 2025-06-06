@@ -1,4 +1,4 @@
-<template>
+<template class="${win ? 'win' : ''}">
     <require from="resources/elements/tile/tile"></require>
     <template if.bind="showBoard">
         <template repeat.for="tile of board">
