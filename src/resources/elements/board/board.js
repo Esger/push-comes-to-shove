@@ -16,11 +16,9 @@ export class BoardCustomElement {
         this._element = element;
         this._eventAggregator = eventAggregator;
         this._settingService = mySettingsService;
-        this._highestValue = 1;
         this._score = 0;
         this.board = [];
         this.showBoard = true;
-        this._newValues = [1];
         this._gameEnd = false;
     }
 
@@ -40,24 +38,26 @@ export class BoardCustomElement {
             x: x,
             y: y,
             id: 'tile_' + y * (this.maxPosition) + x,
-            color: 'transparent',
+            color: 2,
         };
         return tile;
     }
 
     _newBoard() {
-        this._highestValue = 1;
-        this._newValues = [1];
         this._score = 0;
         this._moves = 0;
         this._gameEnd = false;
         this.showBoard = false;
         this.board = [];
 
-        for (let y = 0; y < this.maxPosition; y++) 
-            for (let x = 0; x < this.maxPosition; x++) 
+        for (let y = 0; y < this.maxPosition; y++)
+            for (let x = 0; x < this.maxPosition; x++)
                 this.board.push(this._newTile(x, y));
         this.board.shift();
+        
+        const minEqualTileCount = Math.pow((this.rowTileCount - 2), 2);
+        while(this.board.filter(tile => tile.color == 1).length < minEqualTileCount)
+            this.board[Math.floor(Math.random() * this.board.length)].color = 1;
 
         setTimeout(_ => this.showBoard = true, 200);
 
@@ -84,8 +84,8 @@ export class BoardCustomElement {
         });
     }
 
-    _checkWin(){
-        const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);   
+    _checkWin() {
+        const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);
         if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
         this.win = true;
         this._gameEnd = true;
@@ -116,7 +116,7 @@ export class BoardCustomElement {
 
     _pushColumn(x, direction) {
         const column = this.board.filter(tile => tile.x == x);
-        column.forEach(tile => tile.y += direction); 
+        column.forEach(tile => tile.y += direction);
     }
 
     detached() {
