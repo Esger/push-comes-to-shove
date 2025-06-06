@@ -3,13 +3,15 @@
     <require from="resources/elements/help/help"></require>
 
     <header>
-        <h3 class="moves">Moves: ${moves}<br>Level: ${level}</h3>
         <h1 class="title ${levelClass}"
             title="Click to restart"
             click.delegate="restart()">
             <span repeat.for="letter of title.split('')">${letter}</span>
         </h1>
-        <help containerless></help>
+        <div class="feedback">
+            <h3 class="moves">Moves: ${moves}<br>Level: ${level}</h3>
+            <help containerless></help>
+        </div>
 
         <!-- <h2>${highScore +'+'+ highScore}</h2> -->
     </header>
