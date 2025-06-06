@@ -6,7 +6,9 @@
     height       : var(--tileSize);
     overflow     : hidden;
     position     : absolute;
-    transition   : transform .2s ease-in-out, opacity .2s ease-in-out;
+    left         : var(--tilePadding);
+    top          : var(--tilePadding);
+    transition   : transform .2s ease-in-out;
     width        : var(--tileSize);
 
     &:not(:disabled) {
@@ -39,17 +41,6 @@
             0 0 calc(~'var(--tileSize) * 0.4') 0 var(--succesHightlightColor),
             0 0 calc(~'var(--tileSize) * .3') 0 var(--succesHightlightColor),
             0 0 calc(~'var(--tileSize) * 0.2') 0 var(--succesHightlightColor);
-    }
-
-    &.correct {
-        @tileColor: lightgreen;
-        transform : scale(1.05, 1.05) !important;
-        transition: transform .2s ease-out;
-        z-index   : 100;
-    }
-
-    &.follow {
-        transition: transform .2s ease-in;
     }
 
     &.hide {

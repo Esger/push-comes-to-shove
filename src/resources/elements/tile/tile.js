@@ -11,15 +11,12 @@ export class TileCustomElement {
     constructor(element, eventAggregator) {
         this._eventAggregator = eventAggregator;
         this._element = element;
-        this.correct = false;
-        this.dx = 0;
-        this.dy = 0;
     }
 
     attached() {
         this._setRandomColor();
         this.tile.maxColors = this.maxColors;
-        this.tile.setRandomColor = this._setRandomColor;
+        this._$tile = $('#' + this.tile.id);
     }
 
     push() {
