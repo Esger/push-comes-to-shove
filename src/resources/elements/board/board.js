@@ -16,7 +16,6 @@ export class BoardCustomElement {
         this._element = element;
         this._eventAggregator = eventAggregator;
         this._settingService = mySettingsService;
-        this._level = 1;
         this.board = [];
         this.showBoard = true;
         this._gameEnd = false;
@@ -68,13 +67,10 @@ export class BoardCustomElement {
 
     attached() {
         const settings = this._settingService.getSettings();
-        if (!settings.board || settings.gameEnd) {
-            this._saveSettings();
-        } else {
-            this.board = settings.board;
-            this._moves = settings.moves || 0;
-            this._eventAggregator.publish('moves', { moves: this._moves });
-        }
+        this._moves = settings.moves || 0;
+        this._level = settings.level || 1;
+        this._eventAggregator.publish('moves', { moves: this._moves });
+        this._saveSettings();
         this._pushSubscription = this._eventAggregator.subscribe('push', tile => {
             this._push(tile);
             this._checkWin();
@@ -127,9 +123,8 @@ export class BoardCustomElement {
     }
 
     _saveSettings() {
-        this.settings.board = this.board;
-        this.settings.gameEnd = this._gameEnd;
         this.settings.moves = this._moves;
+        this.settings.level = this._level;
         this._settingService.saveSettings(this.settings);
     }
 
