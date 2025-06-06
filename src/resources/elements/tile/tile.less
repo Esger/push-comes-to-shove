@@ -1,12 +1,14 @@
 .tile {
+    border       : none;
     border-radius: 9in;
     box-shadow   : 0 2px 10px #1e1e1e;
     display      : block;
     height       : var(--tileSize);
     overflow     : hidden;
     position     : absolute;
-    transition   : background-image .2s ease-in-out, opacity .2s ease-in-out;
+    transition   : transform .2s ease-in-out, opacity .2s ease-in-out;
     width        : var(--tileSize);
+
     &:not(:disabled) {
         cursor: pointer;
     }

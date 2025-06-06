@@ -37,9 +37,10 @@ export class BoardCustomElement {
         const tile = {
             x: x,
             y: y,
+            dx: 0,
+            dy: 0,
             id: 'tile_' + y + '-' + x,
             color: 'transparent',
-            value: 1
         };
         return tile;
     }
@@ -76,13 +77,47 @@ export class BoardCustomElement {
         } else {
             this.board = settings.board;
             this._moves = settings.moves || 0;
-            // this._highestValue = this.board[2][2].value;
-            // this._eventAggregator.publish('high', this._highestValue);
             this._eventAggregator.publish('moves', { moves: this._moves });
+        }
+        this._pushSubscription = this._eventAggregator.subscribe('push', tile => this._push(tile));
+    }
+
+    _push(tile) {
+        console.log('tile', tile);
+        switch (true) {
+            case tile.x == 0:
+                this._pushRow(tile.y, 1);
+                break;
+            case tile.x == this.rowTileCount:
+                this._pushRow(tile.y, -1);
+                break;
+            case tile.y == 0:
+                this._pushColumn(tile.x, 1);
+                break;
+            case tile.y == this.rowTileCount:
+                this._pushColumn(tile.x, -1);
+                break;
         }
     }
 
+    _pushRow(y, direction) {
+        for (let x = 0; x < this.rowTileCount; x++) 
+            this.board[y][x].dx += direction;
+        this._moves++;
+        this._eventAggregator.publish('moves', { moves: this._moves });
+        this._saveSettings();
+    }
+
+    _pushColumn(x, direction) {
+        for (let y = 0; y < this.rowTileCount; y++) 
+            this.board[y][x].dy += direction;
+        this._moves++;
+        this._eventAggregator.publish('moves', { moves: this._moves });
+        this._saveSettings();
+    }
+
     detached() {
+        this._pushSubscription.dispose();
     }
 
     _saveSettings() {

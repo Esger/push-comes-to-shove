@@ -13,7 +13,6 @@ export class TileCustomElement {
         this.dragService = dragService;
         this._eventAggregator = eventAggregator;
         this._element = element;
-        this._allowedDirections = [];
         this.correct = false;
         this.dx = 0;
         this.dy = 0;
@@ -25,7 +24,8 @@ export class TileCustomElement {
         this.tile.setRandomColor = this._setRandomColor;
     }
 
-    detached() {
+    push() {
+        this._eventAggregator.publish('push', this.tile);
     }
 
     _setRandomColor = (maxColors = 2) => {

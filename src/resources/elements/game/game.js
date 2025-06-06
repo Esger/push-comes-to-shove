@@ -30,7 +30,7 @@ export class GameCustomElement {
             this.level = level - 1;
             this.levelClass = 'level--' + (level - 1);
         });
-        this._restartSubscription = this._eventAggregator.subscribe('restart', () => {
+        this._restartSubscription = this._eventAggregator.subscribe('restart', _ => {
             this.level = 1;
             this.levelClass = 'level--0';
         });
