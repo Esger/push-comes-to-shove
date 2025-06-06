@@ -4,7 +4,7 @@
             ${correct ? 'correct' : ''}
             ${incorrect ? 'incorrect' : ''}
             x_${tile.x} y_${tile.y}"
-            disabled.bind="tile.x > 0 && tile.x < rowTileCount && tile.y > 0 && tile.y < rowTileCount"
+            disabled.bind="tile.x > 0 && tile.x < rowTileCount && tile.y > 0 && tile.y < rowTileCount || tile.x == 0 && tile.y == 0 || tile.x == rowTileCount && tile.y == rowTileCount || tile.x == 0 && tile.y == rowTileCount || tile.x == rowTileCount && tile.y == 0"
             id.one-time="tile.id"
             css="left: calc(${tile.x} * var(--distance) + var(--tilePadding));
             top: calc(${tile.y} * var(--distance) + var(--tilePadding));
