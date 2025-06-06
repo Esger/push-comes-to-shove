@@ -13,7 +13,6 @@
     @base        : unit((@min-value-px / @root-font-size - @min-vw * @factor / @root-font-size), rem);
     @slope       : unit((100 * @factor), vw);
 
-    // @{property}: @min-value;  // Fallback niet meer nodig?
     @{property} :~"clamp(@{min-value}, @{base} + @{slope}, @{max-value})";
 }
 
