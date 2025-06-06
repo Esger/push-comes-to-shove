@@ -1,13 +1,15 @@
 .tile {
     border-radius: 9in;
     box-shadow   : 0 2px 10px #1e1e1e;
-    cursor       : grab;
     display      : block;
     height       : var(--tileSize);
     overflow     : hidden;
     position     : absolute;
     transition   : background-image .2s ease-in-out, opacity .2s ease-in-out;
     width        : var(--tileSize);
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 
     &.tile--1 {
         background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);

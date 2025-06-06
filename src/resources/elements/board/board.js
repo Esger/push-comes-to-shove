@@ -31,7 +31,6 @@ export class BoardCustomElement {
         this.center = Math.floor(this.boardSize / 2);
         this.offset = this.boardSize * 2 / (this.boardSize + 1);
         this.distance = this._tileSize + this.offset;
-
     }
 
     _newTile(x, y) {

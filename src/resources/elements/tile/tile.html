@@ -1,11 +1,12 @@
 <template>
-    <div class="tile tile--${tile.color}
+    <button class="tile tile--${tile.color}
             ${win ? 'win' : ''}
             ${correct ? 'correct' : ''}
             ${incorrect ? 'incorrect' : ''}
             x_${tile.x} y_${tile.y}"
-         id.one-time="tile.id"
-         css="left: calc(${tile.x} * var(--distance) + var(--tilePadding));
+            disabled.bind="tile.x > 0 && tile.x < rowTileCount && tile.y > 0 && tile.y < rowTileCount"
+            id.one-time="tile.id"
+            css="left: calc(${tile.x} * var(--distance) + var(--tilePadding));
             top: calc(${tile.y} * var(--distance) + var(--tilePadding));
-            transform: translate3d(calc(${dx} * var(--distance)), calc(${dy} * var(--distance)), 0);"></div>
+            transform: translate3d(calc(${dx} * var(--distance)), calc(${dy} * var(--distance)), 0);"></button>
 </template>
