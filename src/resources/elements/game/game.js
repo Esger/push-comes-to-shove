@@ -1,15 +1,13 @@
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { DragService } from 'resources/services/drag-service';
 import { ScoreService } from 'resources/services/score-service';
 
-@inject(DragService, ScoreService, EventAggregator)
+@inject(ScoreService, EventAggregator)
 export class GameCustomElement {
     title = 'Push Comes to Shove';
     level = 1;
 
-    constructor(dragService, scoreService, eventAggregator) {
-        this.dragService = dragService;
+    constructor(scoreService, eventAggregator) {
         this._eventAggregator = eventAggregator;
         this._scoreService = scoreService;
     }

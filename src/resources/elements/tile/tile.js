@@ -1,16 +1,14 @@
 import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { DragService } from 'resources/services/drag-service';
 
-@inject(Element, DragService, EventAggregator)
+@inject(Element, EventAggregator)
 export class TileCustomElement {
     @bindable tile;
     @bindable rowTileCount;
     @bindable maxColors;
     @bindable win;
 
-    constructor(element, dragService, eventAggregator) {
-        this.dragService = dragService;
+    constructor(element, eventAggregator) {
         this._eventAggregator = eventAggregator;
         this._element = element;
         this.correct = false;
