@@ -27,7 +27,7 @@ export class GameCustomElement {
             this.moves = moves.moves;
         })
         this._winSubscription = this._eventAggregator.subscribe('win', level => {
-            this.level = level - 1;
+            this.level = level;
             this.levelClass = 'level--' + (level - 1);
         });
         this._restartSubscription = this._eventAggregator.subscribe('restart', _ => {

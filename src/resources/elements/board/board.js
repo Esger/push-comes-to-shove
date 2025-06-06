@@ -16,7 +16,7 @@ export class BoardCustomElement {
         this._element = element;
         this._eventAggregator = eventAggregator;
         this._settingService = mySettingsService;
-        this._score = 0;
+        this._level = 1;
         this.board = [];
         this.showBoard = true;
         this._gameEnd = false;
@@ -44,7 +44,6 @@ export class BoardCustomElement {
     }
 
     _newBoard() {
-        this._score = 0;
         this._moves = 0;
         this._gameEnd = false;
         this.showBoard = false;
@@ -88,8 +87,9 @@ export class BoardCustomElement {
         const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);
         if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
         this.win = true;
+        this._level++;
         this._gameEnd = true;
-        this._eventAggregator.publish('win');
+        this._eventAggregator.publish('win', this._level);
     }
 
     _push(tile) {
