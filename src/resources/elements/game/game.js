@@ -28,6 +28,8 @@ export class GameCustomElement {
         })
         this._winSubscription = this._eventAggregator.subscribe('win', level => {
             this.level = level;
+            this.rowTileCount++;
+            document.body.style = '--rowTileCount: ' + this.rowTileCount;
             this.levelClass = 'level--' + (level - 1);
         });
         this._restartSubscription = this._eventAggregator.subscribe('restart', _ => {

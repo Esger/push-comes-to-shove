@@ -31,6 +31,7 @@ export class BoardCustomElement {
 
     rowTileCountChanged(newValue) {
         this.maxPosition = newValue - 1;
+        this._newBoard();
     }
 
     _newTile(x, y) {
@@ -44,6 +45,7 @@ export class BoardCustomElement {
     }
 
     _newBoard() {
+        this.win = false;
         this._moves = 0;
         this._gameEnd = false;
         this.showBoard = false;
@@ -67,7 +69,6 @@ export class BoardCustomElement {
     attached() {
         const settings = this._settingService.getSettings();
         if (!settings.board || settings.gameEnd) {
-            this._newBoard();
             this._saveSettings();
         } else {
             this.board = settings.board;
@@ -87,9 +88,11 @@ export class BoardCustomElement {
         const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);
         if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
         this.win = true;
-        this._level++;
         this._gameEnd = true;
-        this._eventAggregator.publish('win', this._level);
+        setTimeout(_ => {
+            this._level++;
+            this._eventAggregator.publish('win', this._level);
+        }, 1500);
     }
 
     _push(tile) {
