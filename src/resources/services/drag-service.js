@@ -13,7 +13,6 @@ export class DragService {
         this._dragStartPos = undefined;
         this._dragEndPos = undefined;
         this._lastZindex = 1;
-        this._dragged = false;
     }
 
     getClientPos(event) {
