@@ -5,7 +5,6 @@ import { MySettingsService } from 'resources/services/my-settings-service';
 @inject(Element, EventAggregator, MySettingsService)
 export class BoardCustomElement {
     @bindable rowTileCount;
-    maxColors = 2;
     win = false;
 
     settings = {
@@ -18,7 +17,6 @@ export class BoardCustomElement {
         this._settingService = mySettingsService;
         this.board = [];
         this.showBoard = true;
-        this._gameEnd = false;
     }
 
     attached() {
@@ -46,7 +44,6 @@ export class BoardCustomElement {
     _newBoard() {
         this.win = false;
         this._moves = 0;
-        this._gameEnd = false;
         this.showBoard = false;
         this.board = [];
 
@@ -84,7 +81,6 @@ export class BoardCustomElement {
         if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
 
         this.win = true;
-        this._gameEnd = true;
         setTimeout(_ => {
             this._level+=1;
             this._saveSettings();

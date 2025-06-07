@@ -6,7 +6,7 @@ help {
     border          : none;
     background-color: transparent;
     .fluid(font-size, 2em, 3em);
-    color      : crimson;
+    color      : hotpink;
     cursor     : help;
     text-shadow: 0 1px 1px var(--hotpinkTint);
     transition : all .2s ease-in-out;
@@ -30,6 +30,7 @@ weak {
     flex-direction  : column;
     justify-content : center;
     font-size       : ~'max(2em, 5vmin)';
+    line-height     : 1.2;
     overflow        : hidden auto;
     transition      : all .5s ease-in-out;
     width           : 100vw;
@@ -42,10 +43,6 @@ weak {
         display        : flex;
         justify-content: space-between;
         align-items    : center;
-    }
-
-    h2:hover {
-        color: crimson;
     }
 
     p,
