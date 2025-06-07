@@ -1,7 +1,7 @@
 export class MySettingsService {
     _isMobile = sessionStorage.getItem('isMobile') == 'true';
     _settingsName = 'push-comes-to-shove';
-    _version = 'v0.1'; // increase when settings object changes
+    _version = 'v0.4'; // increase when settings object changes
     _settings = undefined;
     _defaultSettings = undefined;
 
