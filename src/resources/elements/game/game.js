@@ -1,14 +1,17 @@
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { MySettingsService } from 'resources/services/my-settings-service';
 
-@inject(EventAggregator)
+@inject(EventAggregator, MySettingsService)
 export class GameCustomElement {
     title = 'Push Comes to Shove';
-    level = 1;
-    rowTileCount = 5;
+    FIRSTROWTILECOUNT = 5;
 
-    constructor(eventAggregator) {
+    constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
+        this._settingService = settingsService;
+        this.level = this._settingService.getSettings().level || 1;
+        this.rowTileCount = this.FIRSTROWTILECOUNT + (this.level - 1);
     }
 
     attached() {
@@ -22,16 +25,14 @@ export class GameCustomElement {
             document.body.style = '--rowTileCount: ' + this.rowTileCount;
             this.levelClass = 'level--' + (level - 1);
         });
-        this._restartSubscription = this._eventAggregator.subscribe('restart', _ => {
-            this.level = 1;
-            this.rowTileCount = 5;
-            document.body.style = '--rowTileCount: ' + this.rowTileCount;
-            this.levelClass = 'level--0';
-        });
     }
-
+    
     restart() {
-        this._eventAggregator.publish('restart');
+        this.level = 1;
+        this.rowTileCount = 5;
+        document.body.style = '--rowTileCount: ' + this.rowTileCount;
+        this.levelClass = 'level--0';
+        this._settingService.saveSettings({level: 1});
     }
 
     detached() {

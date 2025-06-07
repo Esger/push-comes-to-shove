@@ -20,7 +20,7 @@ export class MySettingsService {
 
     _getDefaultSettings() {
         this._defaultSettings = this._defaultSettings || {
-            version: this._version || 1.0
+            version: this._version
         };
         return this._defaultSettings;
     }

@@ -9,7 +9,7 @@ export class BoardCustomElement {
     win = false;
 
     settings = {
-        version: 'v1.1', // increase if board structure changes
+        version: 'v0.1', // increase if board structure changes
     }
 
     constructor(element, eventAggregator, mySettingsService) {
@@ -61,13 +61,12 @@ export class BoardCustomElement {
 
         setTimeout(_ => this.showBoard = true, 200);
 
-        this._eventAggregator.publish('reset-score');
         this._eventAggregator.publish('moves', { moves: this._moves });
     }
 
     attached() {
         const settings = this._settingService.getSettings();
-        this._moves = settings.moves || 0;
+        this._moves = 0;
         this._level = settings.level || 1;
         this._eventAggregator.publish('moves', { moves: this._moves });
         this._saveSettings();
@@ -83,10 +82,12 @@ export class BoardCustomElement {
     _checkWin() {
         const boardTiles = this.board.filter(tile => tile.x > 0 && tile.x < this.maxPosition && tile.y > 0 && tile.y < this.maxPosition);
         if (boardTiles.some(tile => tile.color !== boardTiles[0].color)) return;
+
         this.win = true;
         this._gameEnd = true;
         setTimeout(_ => {
-            this._level++;
+            this._level+=1;
+            this._saveSettings();
             this._eventAggregator.publish('win', this._level);
         }, 1500);
     }
@@ -123,7 +124,6 @@ export class BoardCustomElement {
     }
 
     _saveSettings() {
-        this.settings.moves = this._moves;
         this.settings.level = this._level;
         this._settingService.saveSettings(this.settings);
     }
