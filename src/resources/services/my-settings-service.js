@@ -1,7 +1,7 @@
 export class MySettingsService {
     _isMobile = sessionStorage.getItem('isMobile') == 'true';
-    _settingsName = 'one-color';
-    _version = 'v1.0'; // increase when settings object changes
+    _settingsName = 'push-comes-to-shove';
+    _version = 'v0.1'; // increase when settings object changes
     _settings = undefined;
     _defaultSettings = undefined;
 
@@ -20,7 +20,7 @@ export class MySettingsService {
 
     _getDefaultSettings() {
         this._defaultSettings = this._defaultSettings || {
-            version: this._version || 1.0
+            version: this._version
         };
         return this._defaultSettings;
     }

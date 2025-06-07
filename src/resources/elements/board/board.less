@@ -4,6 +4,8 @@ board {
     user-select     : none;
     height          : var(--boardSize);
     width           : var(--boardSize);
+    transition      : transform .75s ease-in;
+    transition-delay: .75s;
 
     &::before {
         content       : '';
@@ -16,9 +18,14 @@ board {
         pointer-events: none;
 
     }
-    &.win::before {
-        border       : 20px solid #00be00;
-        scale        : 1.05;
-        border-radius: 80px;
+
+    &.win {
+        transform: scale3d(20, 20, 1);
+
+        &::before {
+            border       : 20px solid #00be00;
+            scale        : 1.05;
+            border-radius: 80px;
+        }
     }
 }
