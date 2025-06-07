@@ -32,7 +32,14 @@ export class GameCustomElement {
         this.rowTileCount = this.FIRSTROWTILECOUNT;
         document.body.style = '--rowTileCount: ' + this.rowTileCount;
         this.levelClass = 'level--0';
-        this._settingService.saveSettings({level: 1});
+        const settings = this._settingService.getSettings();
+        settings.level = this.level;
+        this._settingService.saveSettings(settings);
+        this._eventAggregator.publish('restart');
+    }
+
+    undo() {
+        this._eventAggregator.publish('undo');
     }
 
     detached() {
