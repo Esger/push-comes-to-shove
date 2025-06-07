@@ -12,7 +12,7 @@
     top            : var(--tilePadding);
     transition     : transform .2s ease-in-out;
     width          : var(--tileSize);
-    user-select: none;
+    user-select    : none;
 
     &:not(:disabled) {
         cursor: pointer;
@@ -23,28 +23,19 @@
     }
 
     &.tile--1 {
-        background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);
-    }
-
-    &.tile--2 {
-        background-image: radial-gradient(var(--crimsonTint) 5%, crimson);
-    }
-
-    &.tile--3 {
         background-image: radial-gradient(var(--purpleTint) 5%, purple);
     }
 
-    &.tile--4 {
+    &.tile--2 {
         background-image: radial-gradient(var(--blackTint) 5%, black);
     }
 
-    &.hide {
-        opacity: 0;
+    &.tile--3 {
+        background-image: radial-gradient(var(--crimsonTint) 5%, crimson);
     }
 
-    &.incorrect {
-        @tileColor: lightcoral;
-        transform : scale(0.95, 0.95) !important;
+    &.tile--4 {
+        background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);
     }
 
     &.tile--top svg {

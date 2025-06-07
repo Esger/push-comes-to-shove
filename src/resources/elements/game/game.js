@@ -5,7 +5,7 @@ import { MySettingsService } from 'resources/services/my-settings-service';
 @inject(EventAggregator, MySettingsService)
 export class GameCustomElement {
     title = 'Push Comes to Shove';
-    FIRSTROWTILECOUNT = 5;
+    FIRSTROWTILECOUNT = 4;
 
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
@@ -29,7 +29,7 @@ export class GameCustomElement {
     
     restart() {
         this.level = 1;
-        this.rowTileCount = 5;
+        this.rowTileCount = this.FIRSTROWTILECOUNT;
         document.body.style = '--rowTileCount: ' + this.rowTileCount;
         this.levelClass = 'level--0';
         this._settingService.saveSettings({level: 1});

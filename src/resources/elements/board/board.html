@@ -3,7 +3,6 @@
     <template if.bind="showBoard">
         <template repeat.for="tile of board">
             <tile tile.bind="tile"
-                  max-colors.bind="maxColors"
                   max-position.bind="maxPosition"
                   containerless></tile>
         </template>
