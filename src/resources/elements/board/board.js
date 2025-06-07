@@ -8,7 +8,7 @@ export class BoardCustomElement {
     win = false;
 
     settings = {
-        version: 'v0.1', // increase if board structure changes
+        version: 'v0.4', // increase if board structure changes
     }
 
     constructor(element, eventAggregator, mySettingsService) {
