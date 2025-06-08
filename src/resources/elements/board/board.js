@@ -48,7 +48,6 @@ export class BoardCustomElement {
         const tile = {
             x: x,
             y: y,
-            id: 'tile_' + y * (this.maxPosition) + x,
             color: 2,
         };
         return tile;
@@ -66,6 +65,7 @@ export class BoardCustomElement {
                 this.board.push(this._newTile(x, y));
         this.board.shift();
 
+        // set exactly enough tiles of the other color
         const minEqualTileCount = Math.pow((this.rowTileCount - 2), 2);
         while (this.board.filter(tile => tile.color == 1).length < minEqualTileCount)
             this.board[Math.floor(Math.random() * this.board.length)].color = 1;

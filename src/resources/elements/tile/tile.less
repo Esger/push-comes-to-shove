@@ -16,10 +16,6 @@
 
     &:not(:disabled) {
         cursor: pointer;
-
-        &:hover svg {
-            opacity: 0.7;
-        }
     }
 
     &.tile--1 {
@@ -36,22 +32,6 @@
 
     &.tile--4 {
         background-image: radial-gradient(var(--hotpinkTint) 5%, hotpink);
-    }
-
-    &.tile--top svg {
-        rotate: 90deg;
-    }
-
-    &.tile--right svg {
-        rotate: 180deg;
-    }
-
-    &.tile--bottom svg {
-        rotate: -90deg;
-    }
-
-    &.tile--left svg {
-        rotate: 0deg;
     }
 
     &::before {
@@ -74,9 +54,31 @@
     }
 
     svg {
-        color  : white;
-        flex   : 0 0 50%;
-        height : 50%;
-        opacity: 0;
+        color         : white;
+        flex          : 0 0 50%;
+        height        : 50%;
+        opacity       : 0;
+        pointer-events: none;
+        will-change   : opacity;
+    }
+
+    &.hover svg {
+        opacity: 0.7;
+    }
+
+    &.tile--down svg {
+        rotate: 90deg;
+    }
+
+    &.tile--right svg {
+        rotate: 0deg;
+    }
+
+    &.tile--up svg {
+        rotate: -90deg;
+    }
+
+    &.tile--left svg {
+        rotate: 180deg;
     }
 }
