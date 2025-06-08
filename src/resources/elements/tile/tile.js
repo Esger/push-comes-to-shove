@@ -14,6 +14,30 @@ export class TileCustomElement {
     
     attached() {
         this.hover = false;
+        this._colDownSubscription = this._eventAggregator.subscribe('hover-colDown', x => {
+            this.direction = 'down';
+            this.hover = x == this.x;
+        });
+        this._colUpSubscription = this._eventAggregator.subscribe('hover-colUp', x => {
+            this.direction = 'up';
+            this.hover = x == this.x;
+        });
+        this._rowRightSubscription = this._eventAggregator.subscribe('hover-rowRight', y => {
+            this.direction = 'right';
+            this.hover = y == this.y;
+        });
+        this._rowLeftSubscription = this._eventAggregator.subscribe('hover-rowLeft', y => {
+            this.direction = 'left';
+            this.hover = y == this.y;
+        });
+        this._unhoverSubscription = this._eventAggregator.subscribe('unhover', _ => this.hover = false);
+    }
+
+    detached() {
+        this._colDownSubscription.dispose();
+        this._colUpSubscription.dispose();
+        this._rowRightSubscription.dispose();
+        this._rowLeftSubscription.dispose();
     }
 
     push() {
@@ -22,25 +46,16 @@ export class TileCustomElement {
     }
 
     doHover() {
+        if (this.x > 0 && this.x < this.maxPosition && this.y > 0 && this.y < this.maxPosition) return;
         this.hover = true;
-
-        // if (this.isDisabled) return;
-        // this.unhover();
-        // if (this.y == 0) {
-        //     $(`.tile.x_${this.x}`).addClass('hover down');
-        // };
-        // if (this.y == this.maxPosition) {
-        //     $(`.tile.x_${this.x}`).addClass('hover up');
-        // };
-        // if (this.x == 0) {
-        //     $(`.tile.y_${this.y}`).addClass('hover right');
-        // };
-        // if (this.x == this.maxPosition) {
-        //     $(`.tile.y_${this.y}`).addClass('hover left');
-        // };
+        if (this.y == 0) this._eventAggregator.publish('hover-colDown', this.x);
+        if (this.y == this.maxPosition) this._eventAggregator.publish('hover-colUp', this.x);
+        if (this.x == 0) this._eventAggregator.publish('hover-rowRight', this.y);
+        if (this.x == this.maxPosition) this._eventAggregator.publish('hover-rowLeft', this.y);
     }
 
     unHover() {
         this.hover = false;
+        this._eventAggregator.publish('unhover', this.x);
     }
 }
