@@ -10,7 +10,8 @@ game {
     justify-content: center;
     height         : 100dvh;
 
-    header, footer {
+    header,
+    footer {
         position       : relative;
         display        : flex;
         flex-direction : column;
@@ -22,8 +23,8 @@ game {
     }
 
     .feedback {
-        display   : flex;
-        width     : 100%;
+        display: flex;
+        width  : 100%;
     }
 
     h1,
@@ -44,14 +45,12 @@ game {
         &.undo {
             margin-left: auto;
         }
-    }
 
-    button,
-    h1 {
         &:hover {
             color: var(--bluevioletTint);
         }
     }
+
 
     h1 {
         cursor         : pointer;
@@ -65,6 +64,10 @@ game {
             text {
                 font-size: 52px;
                 fill     : blueviolet;
+
+            }
+            &:hover text {
+                fill: var(--bluevioletTint);
             }
 
             width : 100%;
