@@ -10,74 +10,86 @@ game {
     justify-content: center;
     height         : 100dvh;
 
-    header {
+    header, footer {
         position       : relative;
         display        : flex;
-        flex-direction: column;
+        flex-direction : column;
         align-items    : center;
         justify-content: space-between;
-        margin         : 0 0 6vh;
+        margin         : 0 0 1vh;
         padding-inline : calc(~'var(--tilePadding) * 1.5');
         width          : var(--boardSize);
+    }
 
-        .feedback{
-            display: flex;
-            width: 100%;
+    .feedback {
+        display   : flex;
+        width     : 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    button {
+        font-family: 'Courier New', Courier, monospace;
+        font-size  : 4vmin;
+        text-shadow: 0 1px 2px var(--hotpinkTint);
+        user-select: none;
+        color      : blueviolet;
+        background : none;
+        border     : none;
+        padding    : 0;
+        margin     : 0;
+        cursor     : pointer;
+
+        &.undo {
+            margin-left: auto;
         }
+    }
 
-        h1,
-        h2,
-        h3,
-        button {
-            font-family: 'Courier New', Courier, monospace;
-            font-size  : 4vmin;
-            text-shadow: 0 1px 2px var(--hotpinkTint);
-            user-select: none;
-            color      : blueviolet;
-            background: none;
-            border: none;
-            padding    : 0;
-            margin     : 0;
-            cursor: pointer;
-            &.undo{
-                margin-left: auto;
+    button,
+    h1 {
+        &:hover {
+            color: var(--bluevioletTint);
+        }
+    }
+
+    h1 {
+        cursor         : pointer;
+        text-transform : uppercase;
+        width          : 100%;
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+
+        svg {
+            text {
+                font-size: 52px;
+                fill     : blueviolet;
             }
-        }
-        
-        button, h1{
-            &:hover {
-                color: var(--bluevioletTint);
-            }
-        }
 
-        h1 {
-            cursor: pointer;
-            .fluid(font-size, 32px, 52px);
-            text-transform: uppercase;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
+            width : 100%;
+            height: auto;
+            scale :1.1;
         }
+    }
 
-        h2 {
-            .fluid(font-size, 36px, 64px);
-            margin-bottom: 6vmin;
-            line-height  : 1.5;
-        }
+    h2 {
+        .fluid(font-size, 36px, 64px);
+        margin-bottom: 6vmin;
+        line-height  : 1.5;
+    }
 
-        h3.moves,
-        button {
-            .fluid(font-size, 15px, 18px);
-        }
+    h3.moves,
+    button {
+        .fluid(font-size, 15px, 18px);
+    }
 
-        h3.moves {
-            text-shadow: none;
-            line-height: 1.2;
-        }
+    h3.moves {
+        text-shadow: none;
+        line-height: 1.2;
+    }
 
-        li {
-            margin-bottom: 6vmin;
-        }
-
+    li {
+        margin-bottom: 6vmin;
     }
 }
